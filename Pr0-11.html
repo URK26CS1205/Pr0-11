@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Side Form Validation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f3;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #bbb;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #2874a6;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b4f72;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Form Validation</h1>
+
+        <form onsubmit="return false;">
+
+            <input type="text" id="name"
+                   placeholder="Enter your name">
+
+            <input type="text" id="age"
+                   placeholder="Enter your age"
+                   inputmode="numeric">
+
+            <input type="text" id="phone"
+                   placeholder="Enter phone number"
+                   inputmode="numeric">
+
+            <br><br>
+
+            <!-- Submit button with onclick -->
+            <button type="button" onclick="validateForm()">
+                Submit
+            </button>
+
+        </form>
+
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+
+        // JavaScript function to process and display data
+        function validateForm() {
+
+            // Get input values
+            let name = document.getElementById("name").value.trim();
+            let age = document.getElementById("age").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+
+            let result = document.getElementById("result");
+
+            // Check whether boxes are empty
+            if (name === "" || age === "" || phone === "") {
+
+                result.style.color = "red";
+                result.innerHTML = "Error: All fields are required!";
+
+            }
+
+            // Check if age and phone contain only numbers
+            else if (!/^[0-9]+$/.test(age) ||
+                     !/^[0-9]+$/.test(phone)) {
+
+                result.style.color = "red";
+                result.innerHTML = "Error: Age and phone must contain only numbers!";
+
+            }
+
+            // Check age range
+            else if (Number(age) < 1 || Number(age) > 120) {
+
+                result.style.color = "red";
+                result.innerHTML = "Error: Please enter a valid age!";
+
+            }
+
+            // If all conditions are satisfied
+            else {
+
+                result.style.color = "green";
+
+                result.innerHTML =
+                    "Form submitted successfully!<br>" +
+                    "Name: " + name + "<br>" +
+                    "Age: " + age + "<br>" +
+                    "Phone: " + phone;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
